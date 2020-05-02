@@ -1,0 +1,9 @@
+/* CUSTOMIZE HERE */
+
+.drs-grid-main {
+	border: 10px solid #555;
+}
+
+.drs-grid-child {
+	border: 5px solid #aaa;
+}

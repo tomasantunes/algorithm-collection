@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bubbles</title>
+		
+		<style>
+			html, body {
+			    height: 100%;
+			    margin: 0;
+			    overflow: hidden;
+			}
+		</style>
+    </head>
+    <body>
+        <div id="container">
+            <canvas id="myCanvas">
+                This browser/device doesn't support canvas.
+            </canvas>
+        </div>
+		
+		<script>
+			var my_canvas = document.getElementById('myCanvas');
+			var context = my_canvas.getContext('2d');
+			
+			var w = document.body.clientWidth;
+			var h = document.body.clientHeight;
+			var circles = [];
+			var n_circles = randomInt(1,10);
+
+			function randomInt(min, max) { return Math.floor(min + (Math.random() * ((max + 1) - min))); }
+			
+			function update() {
+				for(var i=0; i< circles.length; i++) {
+					circles[i].y -= 1;
+					if (circles[i].r > 0.1) {
+						circles[i].r -= 0.01;
+					}
+					else {
+						circles.splice(i, 1);
+					}
+				}
+				
+				n_circles = randomInt(1,10);
+				
+				for(var i=0; i< n_circles;i++) {
+					circles.push({
+						x: randomInt(0,w), 
+						y: randomInt(h, 2*h), 
+						r: 10, 
+					});
+				}
+			}
+			
+			function render() {
+				update();
+				context.clearRect(0,0,w,h);
+				for(var i=0; i< circles.length; i++) {
+					context.beginPath();
+					context.arc(circles[i].x,circles[i].y,circles[i].r,0,2*Math.PI);
+					context.closePath();
+					context.fillStyle = "#4286f4";
+					context.fill();
+				}
+				window.requestAnimationFrame(render);
+			}
+			
+			my_canvas.width = w;
+			my_canvas.height = h;
+			window.requestAnimationFrame(render);
+		</script>
+    </body>
+</html>

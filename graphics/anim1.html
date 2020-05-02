@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Collisions</title>
+        <link rel="stylesheet" href="css/style.css">
+		
+		<style>
+			html, body {
+			    height: 100%;
+			    margin: 0;
+			    overflow: hidden;
+			}
+		</style>
+    </head>
+    <body>
+        <div id="container">
+            <canvas id="myCanvas">
+                This browser/device doesn't support canvas.
+            </canvas>
+        </div>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script>
+			var my_canvas = document.getElementById('myCanvas');
+			var context = my_canvas.getContext('2d');
+			
+			
+			var w = $('body').width();
+			var h = $('body').height();
+			var circle = {
+					x: w / 2, 
+					y: h / 2, 
+					r: randomInt(10,25), 
+					s: {x: randomInt(1,5), y: randomInt(1,5)},
+					c: getColor(),
+				}
+			
+
+			function randomInt(min, max) { return Math.floor(min + (Math.random() * ((max + 1) - min))); }
+			function randomChoice(choices) { return choices[randomInt(0, choices.length-1)]; }
+			
+			function getColor() {
+				var colors = [[22, 60, 122, Math.random()], [232, 152, 62, Math.random()], [110, 163, 62, Math.random()]];
+				var c = randomChoice(colors);
+				c = 'rgba('+c[0]+', '+c[1]+', '+c[2]+', '+c[3]+')';
+				return c;
+			}
+			
+			function update(i) {
+				if (i == 0) {
+
+				}
+				circle.x += circle.s.x;
+				circle.y += circle.s.y;
+			}
+			
+			function render() {
+				context.clearRect(0,0,w,h);
+				for(var i=0; i < 6; i++) {
+					update(i);
+				}
+				context.beginPath();
+					context.arc(circles[i].x,circles[i].y,circles[i].r,0,2*Math.PI);
+					context.closePath();
+					context.fillStyle = circles[i].c;
+					context.fill();
+				window.requestAnimationFrame(render);
+			}
+			
+			my_canvas.width = w;
+			my_canvas.height = h;
+			window.requestAnimationFrame(render);
+		</script>
+    </body>
+</html>

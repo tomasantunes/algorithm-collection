@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Canvas Template</title>
+	<style>
+		html, body {
+		    height: 100%;
+		    margin: 0;
+		    overflow: hidden;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas1">Canvas not supported.</canvas>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			var canvas1 = document.getElementById('canvas1');
+			var ctx = canvas1.getContext('2d');
+			var w = $('body').width();
+			var h = $('body').height();
+			var squares = [];
+			var current_index = 0;
+			var anim_sequence = [0,4,5,1,2,6,7,3,2,6,5,1];
+			var frame = 0;
+			var mouse = { x: -1, y: -1 };
+
+			canvas1.width = w;
+			canvas1.height = h;
+
+			// test
+			ctx.fillStyle = '#603b5f';
+			squares.push(new Square(100, 100));
+			squares.push(new Square(225, 100));
+			squares.push(new Square(350, 100));
+			squares.push(new Square(475, 100));
+			squares.push(new Square(100, 225));
+			squares.push(new Square(225, 225));
+			squares.push(new Square(350, 225));
+			squares.push(new Square(475, 225));
+
+			requestAnimationFrame(update);
+
+		    $(document).click(function(event) {
+		        mouse.x = event.pageX;
+		        mouse.y = event.pageY;
+		    });
+
+			function update() {
+				if (frame > 10) {
+					if (current_index < anim_sequence.length - 1) {
+						current_index += 1;
+					}
+					else {
+						current_index = 0;
+					}
+					frame = 0;
+				}
+				render();
+				requestAnimationFrame(update);
+				frame += 1;
+			}
+
+			function render() {
+				ctx.clearRect(0,0,w,h);
+
+				for (var i = 0; i < squares.length; i++) {
+					var s = squares[i];
+					ctx.fillRect(s.x, s.y, s.w, s.h);
+					if (checkCollision(mouse, s)) {
+						squares.splice(i, 1);
+					}
+				}
+			}
+
+			function checkCollision(a, b) {
+				if (a.x > b.x && a.y > b.y && a.x < b.x + b.w && a.y < b.y + b.h) {
+					return true;
+				}
+				return false;
+			}
+
+			function Square(x,y) {
+				var s = this;
+				s.x = x;
+				s.y = y;
+				s.w = 100;
+				s.h = 100;
+			}
+		});
+
+
+	</script>
+</body>
+</html>

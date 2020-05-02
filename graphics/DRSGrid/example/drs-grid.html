@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DRSGrid</title>
+	
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+	<link href="https://fonts.googleapis.com/css?family=Michroma" rel="stylesheet"> 
+	<link rel="stylesheet" href="../dist/css/drs-grid.min.css">
+	<link rel="stylesheet" href="../dist/css/drs-grid-theme.css">
+	<style>
+		body {
+			margin: 0;
+			overflow-x: hidden;
+			font-family: 'Michroma', sans-serif;
+		}
+		
+		#content {
+			width: 100%;
+			height: 100vh;
+			border: 1px solid black;
+		}
+		
+		.move-icon {
+			width: 30px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+		
+		.resize-icon {
+			width: 30px;
+			position: absolute;
+			right: 0;
+			bottom: 0;
+		}
+	</style>
+</head>
+<body>
+	<div id="content">
+
+	</div>
+
+	<button onclick="displayInfo()">Get Info</button>
+
+	<div id="display">
+
+	</div>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script src="../src/js/drs-grid.js"></script>
+	<script>
+
+		var drs = new DRSGrid({
+			element: '#content',
+			rects: [
+				[0,0,33.3333,33.3333],
+				[33.3333,0,33.3333,33.3333],
+				[66.6666,0,33.3333,33.3333],
+				[0,33.3333,33.3333,33.3333],
+				[33.3333,33.3333,33.3333,33.3333],
+				[66.6666,33.3333,33.3333,33.3333],
+				[0,66.6666,33.3333,33.3333],
+				[33.3333,66.6666,33.3333,33.3333],
+				[66.6666,66.6666,33.3333,33.3333],
+
+			],
+			minSizeBehaviour: 'freeze',
+			pull: true,
+			minWidth: 50,
+			minHeight: 50,
+		});
+		
+		$('.drs-grid-child').append('<img class="resize-icon" src="img/resize-icon.png">');
+		$('.drs-grid-child').append('<img class="move-icon" src="img/move-icon.png">');
+		
+		displayInfo();
+
+		
+		$('#content').on('resize', displayInfo);
+		$('#content').on('drag', displayInfo);
+		
+		function displayInfo() {
+		
+			$('.child-info').remove();
+			var rects = drs.getInfo();
+		
+			$.each(rects, function(i, val) {
+				var x = parseInt(val.x, 10);
+				var y = parseInt(val.y, 10);
+				var w = parseInt(val.w, 10);
+				var h = parseInt(val.h, 10);
+				$('#drs-grid-child'+ i).append('<span class="child-info">('+x+', '+y+', '+w+', '+h+')</span>');
+			});
+		}
+
+		
+	</script>
+</body>
+</html>

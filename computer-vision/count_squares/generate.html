@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Generate Square Grid</title>
+	
+	<style>
+		#my_canvas {
+			border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="my_canvas"></canvas>
+
+	<script>
+		ctx = my_canvas.getContext('2d');
+		var w = 1000;
+		var h = 1000;
+		var maximum_size = 62;
+		var minimum_size = 5;
+		my_canvas.width = w;
+		my_canvas.height = h;
+
+		var squares = [];
+
+		squares.push([0,0,w,h]);
+
+		function divide() {
+			count = 0;
+
+			for(var i = 0; i < squares.length; i++) {
+				var s = squares[i];
+				var check = true;
+				
+				if(s[2] / 2 < minimum_size) { check = false; }
+				if(!randomBool()) { check = false; } 
+				if(s[2] / 2 > maximum_size) { check = true; }
+				
+				if(check) {
+					var square1 = [s[0], s[1], s[2] / 2, s[3] / 2];
+					var square2 = [s[0] + (s[2] / 2), s[1], s[2] / 2, s[3] / 2];
+					var square3 = [s[0], s[1] + (s[3] / 2), s[2] / 2, s[3] / 2];
+					var square4 = [s[0] + (s[2] / 2), s[1] + (s[3] / 2), s[2] / 2, s[3] / 2];
+
+					squares.push(square1);
+					squares.push(square2);
+					squares.push(square3);
+					squares.push(square4);
+					delete squares[i];
+				}
+				count += 1;
+				if( count > 500000) {
+				 break;
+				}
+			}
+		}
+
+		function randomBool() { return Math.random() >= 0.5; };
+
+		divide()
+
+		ctx.fillStyle = "white";
+		ctx.fillRect(0,0,w,h);
+
+		my_count = 0;
+		for(key in squares) {
+			my_count += 1;
+			var s = squares[key];
+			ctx.strokeRect(s[0], s[1], s[2], s[3]);
+		}
+		console.log(my_count);
+	</script>
+</body>
+</html>

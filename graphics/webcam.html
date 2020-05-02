@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Documento sem título</title>
+</head>
+
+<body>
+<video id="video" width="630" height="472" autoplay></video>
+<button id="snap">Snap Photo</button>
+<canvas id="canvas" width="354" height="472"></canvas>
+
+<script>
+// elementos, configurações, etc...
+var video = document.getElementById('video');
+// snapshot
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+var video = document.getElementById('video');
+
+// acesso à camera
+if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+        video.srcObject = stream;
+        video.onloadedmetadata = function(e) {
+			video.play();
+		};
+    });
+}
+
+
+
+// trigger
+document.getElementById("snap").addEventListener("click", function() {
+	var x = (630 - 354) / 2;
+    context.drawImage(video, x, 0, 354, 472, 0, 0, 354, 472);
+});
+</script>
+</body>
+</html>

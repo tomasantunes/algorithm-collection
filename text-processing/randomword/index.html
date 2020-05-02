@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Random Word</title>
+        <meta charset="utf-8">
+        <link href='http://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+        <style>
+            body {
+                font-family: 'Oxygen', sans-serif;
+                color: #444;
+                background-color: #ddd;
+            }
+            div {
+                max-width: 800px;
+                margin: 10px auto;
+            }
+            .pull-right {
+                float:right;
+            }
+
+            .delimiter {
+                clear:both;
+                width:100%;
+            }
+
+            #btn {
+                background-color: #bbb;
+                outline: none;
+                border: none;
+                padding: 20px 30px;
+            }
+            p { font-size: 20px; }
+            
+        </style>
+    </head>
+    <body>
+        <div>
+            <h1>Random Word</h1>
+            <button id="btn">
+                Get Word
+            </button>
+            <br>
+            <p id="word"></p>
+            
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+            <script src="main.js"></script>
+        </div>
+    </body>
+</html>

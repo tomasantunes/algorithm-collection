@@ -1,0 +1,44 @@
+<button id="button1">Button</button>
+<canvas id="my_canvas"></canvas>
+
+<style>
+#my_canvas {
+  border: 1px solid black;
+}
+</style>
+
+<script>
+var context = null;
+var points_array = [];
+
+window.onload = function() {
+  context = my_canvas.getContext('2d');
+  my_canvas.width = 400;
+  my_canvas.height = 300;
+}
+
+my_canvas.addEventListener('click', function(e) { 
+  var mouseX = e.pageX - my_canvas.offsetLeft;
+  var mouseY = e.pageY - my_canvas.offsetTop;
+  
+  points_array.push({x: mouseX, y: mouseY});
+  
+  context.beginPath();
+  context.arc(mouseX, mouseY,10,0,2*Math.PI);
+  context.fill();
+});
+
+button1.addEventListener('click',function() {
+  context.beginPath();
+  context.moveTo(points_array[0]['x'], points_array[0]['y']);
+  var i = 1;
+  var animation = setInterval(function() { 
+    context.lineTo(points_array[i]['x'], points_array[i]['y']);
+    context.stroke();
+    i += 1;
+    if(i >= points_array.length) {
+      clearInterval(animation);
+    }
+  }, 500);
+});
+</script>

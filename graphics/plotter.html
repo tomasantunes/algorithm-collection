@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Plotter</title>
+
+  <style>
+    #my_canvas {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="my_canvas">Canvas not supported</canvas>
+  <p>Expression:</p>
+  <p><span>y = </span><input id="expression-input" type="text"></p>
+  <button id="start-btn">Start</button>
+  <script>
+    function Plotter() {
+      var self = this;
+
+      self.context = my_canvas.getContext('2d');
+      self.w = 400;
+      self.h = 300;
+      self.frame_count = 0;
+
+      self.init = function() {
+        my_canvas.width = self.w;
+        my_canvas.height = self.h;
+
+        startBtn =document.getElementById('start-btn');
+        startBtn.addEventListener('click', function() {
+          self.clear();
+          self.ball.x = 0;
+          window.requestAnimationFrame(self.mainLoop);
+        });
+      };
+
+      self.ball = {
+        x : 0,
+        y : self.h / 2,
+        r : 3,
+        direction : { x : 1, y : 1},
+        amplitude : 0,
+      };
+
+      self.mainLoop = function() {
+        self.frame_count += 1;
+        self.update();
+        self.render();
+        if (self.ball.x < self.w) {
+          window.requestAnimationFrame(self.mainLoop);
+        }
+      };
+
+      self.update = function() {
+        if(self.ball.amplitude < 150) {
+          self.ball.amplitude += 0.2;
+        }
+
+        var input = document.getElementById('expression-input');
+        var val = input.value;
+
+        val = val.replace(/x/gi, "self.ball.x");
+        val = val.replace(/y/gi, "self.ball.y");
+
+        self.ball.x += 1;
+        self.ball.y = self.h - eval(val);
+      };
+
+      self.render = function() {
+        self.context.beginPath();
+        self.context.arc(self.ball.x, self.ball.y, self.ball.r, 0, 2 * Math.PI);
+        self.context.closePath();
+        self.context.fill();
+      };
+
+      self.clear = function() {
+        self.context.clearRect(0, 0, self.w, self.h);
+      };
+    }
+
+    var p = new Plotter();
+    p.init();
+
+  </script>
+</body>
+</html>

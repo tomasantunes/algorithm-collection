@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Canvas Template</title>
+	<style>
+		html, body {
+		    height: 100%;
+		    margin: 0;
+		    overflow: hidden;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas1">Canvas not supported.</canvas>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			var canvas1 = document.getElementById('canvas1');
+			var ctx = canvas1.getContext('2d');
+			var w = $('body').width();
+			var h = $('body').height();
+			var rects = [];
+			var frame = 0;
+
+			canvas1.width = w;
+			canvas1.height = h;
+
+			ctx.fillStyle = '#0048bc';
+
+			function Rect(x,y) {
+				var r = this;
+				r.x = x;
+				r.y = y;
+				r.w = 100;
+				r.h = 25;
+				r.direction = "up";
+				
+				r.updateWidth = function() {
+					if (r.direction == "up") {
+						r.w += 5;
+						if (r.w > 300) {
+							r.direction = "down";
+						}
+					}
+					else {
+						r.w -= 5;
+						if (r.w < 30) {
+							r.direction = "up";
+						}
+					}
+				};
+			}
+			
+			rects.push(new Rect(randomInt(0,w), randomInt(0,h)));
+			requestAnimationFrame(update);
+
+			function update() {
+				if (frame % 100 == 0) {
+					rects.push(new Rect(randomInt(0,w), randomInt(0,h)));
+					if (rects.length > 10) {
+						rects.shift();
+					}
+				}
+				for (var i in rects) {
+					rects[i].updateWidth();
+				}
+				render();
+				requestAnimationFrame(update);
+				frame += 1;
+			}
+
+			function render() {
+				ctx.clearRect(0,0,w,h);
+				
+				for (var i in rects) {
+					var r = rects[i];
+					ctx.fillRect(r.x, r.y, r.w, r.h);
+				}
+			}
+
+			
+			
+			function randomInt(min, max) { return Math.floor(min + (Math.random() * ((max + 1) - min))); }
+		});
+
+
+	</script>
+</body>
+</html>

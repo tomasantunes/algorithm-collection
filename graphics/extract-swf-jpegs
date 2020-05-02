@@ -1,0 +1,25 @@
+#dependencies: swftools
+#! /bin/bash
+
+if [ -z "$1" ] 
+then
+	echo "No argument supplied";
+	exit 1;
+fi
+
+echo "Starting..."
+STR=$(swfextract $1 | sed -n '/JPEGs: ID(s)/,/\[/p' | sed 's/.*JPEGs: ID(s)//' | sed 's/\[.*//');
+echo $STR;
+IDS=$(echo $STR | tr "," "\n");
+
+if [ ! -d "./jpegs" ]
+then
+	mkdir "jpegs";
+fi
+
+for ID in $IDS
+do
+	ID=$ID | xargs;
+	swfextract  -j $ID $1 -o "./jpegs/image$ID.jpg";
+done
+echo "Done."

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>RGB Color Wheel</title>
+	<style>
+		html, body {
+		    height: 100%;
+		    margin: 0;
+		    overflow: hidden;
+		}
+
+	</style>
+</head>
+<body>
+	<canvas id="canvas1">Canvas not supported.</canvas>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			var canvas1 = document.getElementById('canvas1');
+			var ctx = canvas1.getContext('2d');
+			var w = $('body').width();
+			var h = $('body').height();
+
+			canvas1.width = w;
+			canvas1.height = h;
+
+			ctx.beginPath();
+			ctx.strokeStyle = '#F0F';
+			ctx.lineWidth = 100;
+			ctx.arc(w/2, h/2, 200, 0.6666 * Math.PI, 1.3333 * Math.PI, false);
+			ctx.stroke();
+			ctx.closePath();
+
+			ctx.beginPath();
+			ctx.strokeStyle = '#0FF';
+			ctx.lineWidth = 100;
+			ctx.arc(w/2, h/2, 200, 1.3333 * Math.PI, 2 * Math.PI, false);
+			ctx.stroke();
+			ctx.closePath();
+
+			ctx.beginPath();
+			ctx.strokeStyle = '#FF0';
+			ctx.lineWidth = 100;
+			ctx.arc(w/2, h/2, 200, 0 * Math.PI, 0.6666 * Math.PI, false);
+			ctx.stroke();
+			ctx.closePath();
+
+			ctx.beginPath();
+			ctx.strokeStyle = '#F00';
+			ctx.lineWidth = 100;
+			ctx.arc(w/2, h/2, 100, 0.3333 * Math.PI, 0.9999 * Math.PI, false);
+			ctx.stroke();
+			ctx.closePath();
+
+			ctx.beginPath();
+			ctx.strokeStyle = '#00F';
+			ctx.lineWidth = 100;
+			ctx.arc(w/2, h/2, 100, 0.9999 * Math.PI, 1.6666 * Math.PI, false);
+			ctx.stroke();
+			ctx.closePath();
+
+			ctx.beginPath();
+			ctx.strokeStyle = '#0F0';
+			ctx.lineWidth = 100;
+			ctx.arc(w/2, h/2, 100, 1.6666 * Math.PI, 0.3333 * Math.PI, false);
+			ctx.stroke();
+			ctx.closePath();
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Idea Generator 1</title>
+	<style>
+		html, body {
+		    height: 100%;
+		    margin: 0;
+		    overflow: hidden;
+		}
+
+		p {
+			font-size: 24px;
+			font-family: Arial, sans-serif;
+		}
+
+		.container {
+			width: 1000px;
+			margin: 0 auto;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div id="display"></div>
+		<button id="next-btn">Next</button>
+	</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="20k-words.js"></script>
+	<script>
+		$(document).ready(function() {
+			var word1;
+			var word2;
+
+			function Word(str) {
+				var c = this;
+				c.str = str;
+
+				c.print = function() {
+					$("#display").append("<p>"+c.str+"</p>");
+				}
+			}
+
+			function generateWordChain() {
+				for (var i = 0; i < randomInt(2, 6); i++) {
+					var str = randomChoice(words);
+					word = new Word(str);
+					word.print();
+				}
+			}
+
+			function init() {
+				generateWordChain();
+
+				$("#next-btn").click(function() {
+					$("#display").empty();
+					generateWordChain();
+				});
+			}
+
+			init();
+		});
+
+		function random(min, max)      { return (min + (Math.random() * (max - min)));            }
+		function randomChoice(choices) { return choices[randomInt(0, choices.length-1)]; }
+		function randomBool() { return Math.random() >= 0.5; };
+		function randomInt(min, max) { return Math.floor(min + (Math.random() * ((max + 1) - min))); }
+	</script>
+</body>
+</html>
