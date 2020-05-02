@@ -23,6 +23,6 @@ Collection of algorithms
 
 [Algorithms Illuminated](http://algorithmsilluminated.org/)
 
-Blogs
+### Blogs
 
 [Petr Mitrichev](https://petr-mitrichev.blogspot.com/)
