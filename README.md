@@ -17,6 +17,8 @@ Collection of algorithms
 
 [PHP Algorithms](https://github.com/doganoo/PHPAlgorithms)
 
+[Rosetta Code](http://rosettacode.org/wiki/Rosetta_Code)
+
 ### Books
 
 [Algorithms by Jeff Erickson](http://jeffe.cs.illinois.edu/teaching/algorithms/)
