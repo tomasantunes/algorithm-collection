@@ -1,7 +1,7 @@
 # algorithm-collection
 Collection of algorithms
 
-Links
+### Links
 
 [Javascript Algorithms](https://github.com/trekhleb/javascript-algorithms)
 
@@ -17,7 +17,7 @@ Links
 
 [PHP Algorithms](https://github.com/doganoo/PHPAlgorithms)
 
-Books
+### Books
 
 [Algorithms by Jeff Erickson](http://jeffe.cs.illinois.edu/teaching/algorithms/)
 
