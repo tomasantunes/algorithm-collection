@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Grid Generator</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="css/bootstrap-select.min.css">
+
+    <!-- Custom CSS -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+	
+	
+
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+		<a href="#menu-toggle" class="btn btn-info" id="menu-toggle"><img src="img/menu-icon.png"></a>
+		
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <div class="settings">
+				<div>
+					<p>Color</p>
+					<input type="text" class="form-control" id="color-input" value="black">
+				</div>
+				<div>
+					<p>Total Width (Pixels)</p>
+					<input type="text" class="form-control" id="total-width-input" value="500">
+				</div>
+				<div>
+					<p>Total Height (Pixels)</p>
+					<input type="text" class="form-control" id="total-height-input" value="500">
+				</div>
+				<div>
+					<p>Cell Width</p>
+					<input type="text" class="form-control" id="cell-width-input" value="10">
+				</div>
+				<div>
+					<p>Cell Height</p>
+					<input type="text" class="form-control" id="cell-height-input" value="10">
+				</div>
+				<div>
+					<p>Cell Unit</p>
+					<select id="unit-select">
+						<option value="pixels">Pixels</option>
+						<option value="percentage">Percentage</option>
+					</select>
+				</div>
+				<div>
+					<button class="btn btn-info" id="generate-btn">Generate Grid</button>
+				</div>
+				<div>
+					<a href="#" class="btn btn-info" id="download-btn">Download</a>
+				</div>
+			</div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+					<canvas id="c"></canvas>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+	
+	<script src="js/bootstrap-select.min.js"></script>
+
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+	
+	$('#unit-select').selectpicker({
+		style: 'btn-default',
+		size: 4
+	});
+    </script>
+	
+	<script src="js/grid.js"></script>
+
+</body>
+
+</html>

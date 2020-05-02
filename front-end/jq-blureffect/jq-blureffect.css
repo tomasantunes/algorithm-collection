@@ -1,0 +1,22 @@
+.blur {
+	transform-origin: 50% 50%;
+	opacity: 0;
+	visibility: hidden;
+	filter: blur(8px);
+	transform: scale(0.0001, 0.0001);
+}
+.blur-in {
+	visibility: visible;
+	filter: blur(0px);
+	transform: scale(1, 1);
+	opacity: 1;
+	transition: all 0.25s ease-out;
+}
+
+.blur-out {
+	visibility: hidden;
+	filter: blur(8px);
+	transform: scale(0.0001, 0.0001);
+	opacity: 0;
+	transition: all 0.25s ease-out;
+}

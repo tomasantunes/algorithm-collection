@@ -1,0 +1,14 @@
+<script>
+function createWave(n, r) {
+	for (var i = 0; i < r; i++) {
+		for (var j = 0; j <= n; j++) {
+			document.write(j + '<br>');
+		}
+		for (var jj = n; jj >= 0; jj--) {
+			document.write(jj + '<br>');
+		}
+	}
+}
+
+createWave(9, 999);
+</script>
