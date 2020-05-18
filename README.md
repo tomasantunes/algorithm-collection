@@ -25,6 +25,10 @@ Collection of algorithms
 
 [Algorithms Illuminated](http://algorithmsilluminated.org/)
 
+[Algorithms (2006)](http://algorithmics.lsi.upc.edu/docs/Dasgupta-Papadimitriou-Vazirani.pdf)
+
+[Data Structures and Algorithms: The Basic Toolbox](https://people.mpi-inf.mpg.de/~mehlhorn/Toolbox.html)
+
 ### Blogs
 
 [Petr Mitrichev](https://petr-mitrichev.blogspot.com/)
